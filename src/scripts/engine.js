@@ -7,14 +7,32 @@ const state = {
     },
     values: {
         timeId: null,
+        
         gameVelocity: 500,
         hitPosition: 0,
         result: 0,
+        curretTime: 60,
     },
+
+    actions: {
+        //timeId: setInterval(randomSquare, 1000),
+        countDownTimerId: setInterval(countDown, 1000),
+
+    }
 
 
 };
 
+function countDown() {
+    state.values.curretTime --;
+    state.view.timeLeft.textContent = state.values.curretTime;
+
+    if (state.values.curretTime < 0) {
+        clearInterval(state.actions.countDownTimerId);
+        clearInterval(state.values.timeId);
+        alert ("Game Over! o seu resultado foi: " + state.values.result);
+    }
+}
 function randomSquare() {
     state.view.squares.forEach((square) => {
         square.classList.remove("enemy");
